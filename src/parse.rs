@@ -136,7 +136,6 @@ pub fn set_brother_version(service: &PService, services: &Vec<PService>, version
         }
     }
     for item in list {
-        println!("受影响的服务:{}", item);
         let path = Path::new(&item).join("pom.xml");
         if !Path::new(&path).exists() {
             panic!("修改{}版本失败, pom.xml文件不存在", item);
@@ -157,6 +156,7 @@ pub fn set_brother_version(service: &PService, services: &Vec<PService>, version
         if last_version == "" {
             continue;
         }
+        println!("受影响的服务:{}", item);
         let data = re.replace(&contents, |caps: &Captures| {
             format!(
                 "<artifactId>{}</artifactId>{}<version>{}</version>",
